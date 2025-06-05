@@ -1,5 +1,5 @@
-# This defines our provider and necessary information to utilize the provider
-# Documentation can be found here: https://registry.terraform.io/providers/Telmate/proxmox/latest/docs/guides/developer
+## Define provider and its version
+# Documentation can be found here: https://registry.terraform.io/providers/Telmate/proxmox/latest/docs/guides/developerterraform 
 terraform {
   required_providers {
     proxmox = {
@@ -9,6 +9,7 @@ terraform {
   }
 }
 
+## Define provider configuration
 provider "proxmox" {
   pm_api_url = var.pve_api_url
   pm_api_token_id = var.pve_api_token_id
@@ -16,18 +17,19 @@ provider "proxmox" {
   pm_tls_insecure = true
 }
 
-# Using our provider, we're defining a new resources called "lxc"
-# The name, cores, memory, etc. have all been converted to a variable in variables.tf
+## Define resource configuration
 resource "proxmox_lxc" "basic" {
   count        = var.lxc_count  
   target_node  = var.pve_hostname
-  hostname     = "${var.lxc_name}-${count.index + 1}" # Example: lxc_name is 'test', count is 3. This will name lxcs "test-1, test-2, test-3"
+  hostname     = "${var.lxc_name}-${count.index + 1}"
   vmid         = var.lxc_id + count.index
+  onboot       = var.lxc_onboot
+  start        = var.lxc_start
   ostemplate   = "${var.lxc_template_datastore}:vztmpl/${var.lxc_template}"
   password     = var.lxc_password
+  
   unprivileged = true
 
-  // Terraform will crash without rootfs defined
   rootfs {
     storage = var.lxc_datastore
     size    = var.lxc_disk_size 

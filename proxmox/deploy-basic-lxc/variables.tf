@@ -38,6 +38,17 @@ variable "lxc_id" {
   type        = number
 }
 
+variable "lxc_start" {
+  description = "Whether the LXC is started on boot"
+  type = string
+  default = true
+}
+
+variable "lxc_onboot" {
+  description = "Whether the LXC should start on host boot (1 for yes, 0 for no)"
+  type = string
+}
+
 variable "lxc_count" {
   description = "Number of LXC containers to create"
   type        = number

@@ -32,6 +32,9 @@ lxc_template_datastore = ""
 # Starting VMID/LXC ID; increments by +1 for each container if multiple are created
 lxc_id                 = "100"
 
+# Boolean ("true" or "false") defining if a VM starts automatically on host boot
+lxc_onboot           = "true"
+
 # Datastore where the LXC container rootfs will be created
 lxc_datastore          = ""
 
