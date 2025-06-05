@@ -1,5 +1,14 @@
 # This defines our provider and necessary information to utilize the provider
 # Documentation can be found here: https://registry.terraform.io/providers/Telmate/proxmox/latest/docs/guides/developer
+terraform {
+  required_providers {
+    proxmox = {
+      source = "telmate/proxmox"
+      version = "3.0.1-rc4"
+    }
+  }
+}
+
 provider "proxmox" {
   pm_api_url = var.pve_api_url
   pm_api_token_id = var.pve_api_token_id
@@ -8,7 +17,7 @@ provider "proxmox" {
 }
 
 # Using our provider, we're defining a new resources called "vm"
-# The name, cores, memory, etc. have all been converted to a variable in vars.tf
+# The name, cores, memory, etc. have all been converted to a variable in variables.tf
 resource "proxmox_vm_qemu" "vm" {
  name        = "${var.vm_name}-${count.index + 1}" # Example: vm_name is 'test', count is 3. This will name VMs "test-1, test-2, test-3"
  target_node = var.pve_hostname
