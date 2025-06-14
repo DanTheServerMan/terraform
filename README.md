@@ -16,3 +16,6 @@ Further guidance on how to use this script is here: https://dantheserverman.com/
 NOTE: This performs a clone operation, if you are deploying many VMs you may get an error such as "TASK ERROR: clone failed: cfs-lock 'datastore' error: got lock request timeout'", and your 'terraform apply' will fail. If this happens, just reapply the changes, and it will finish. This error can be due to ProxMox not allowing so many disk clone operations in parallel.
 
 **deploy-basic-lxc** - This deploys basic, unpriv containers using a container template that you should already have downloaded. All variables such as ISOs, datastores, RAM, cores, etc. must be defined in the terraform.tfvars file.
+
+## **Intersight**
+All Intersight scripts are currently in development and not for use.
