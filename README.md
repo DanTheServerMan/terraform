@@ -19,3 +19,5 @@ NOTE: This performs a clone operation, if you are deploying many VMs you may get
 
 ## **Intersight**
 All Intersight scripts are currently in development and not for use.
+
+**server-profile-template.tf** - This script is intended to call specific modules under ```modules/```. These modules are meant to complete a basic Intersight server profile template. All of the configuration specifics should be in in ```example-terraform.tfvars```. You should copy this file, rename it to ```terraform.tfvars```, and add your configuration as needed. 
