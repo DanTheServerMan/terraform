@@ -51,7 +51,7 @@ disk {
    bridge = var.vm_nic1_bridge
    firewall = var.vm_nic1_firewalls
   }
-
+  
   serial {
    id = 0
  }
