@@ -30,6 +30,10 @@ resource "proxmox_vm_qemu" "vm" {
  desc        = var.vm_desc
  clone       = var.vm_template 
  ipconfig0   = var.vm_ipconfig[count.index]
+ tags        = var.vm_tags
+ boot        = var.vm_boot_device
+ bios        = var.vm_bios
+ agent       = var.vm_qemu_agent
  force_create = true
 
  disk {
@@ -39,19 +43,19 @@ resource "proxmox_vm_qemu" "vm" {
    type = "disk"
    slot = var.vm_disk1_slot
  }
-
-disk {
+ 
+ disk {
   storage = var.vm_disk1_datastore
   type    = "cloudinit"  
   slot = "ide0"
 }
- 
+
  network {
    model = var.vm_nic1_model
    bridge = var.vm_nic1_bridge
    firewall = var.vm_nic1_firewalls
   }
-
+  
   serial {
    id = 0
  }

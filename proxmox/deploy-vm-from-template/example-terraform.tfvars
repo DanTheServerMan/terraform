@@ -21,7 +21,10 @@ pve_hostname        = "pmx-2"
 # VM General Configuration
 # -------------------------------------------------------------------
 # This is the STARTING VM ID, with count adding onto it (e.g. ID+1, ID+2, etc.)
-vm_id               = "8000"
+vm_id               = "9000"
+
+# ProxMox tag assigned to the VM
+vm_tags             = "dev"
 
 # The base name of the VM
 vm_name             = "terraform-vm"
@@ -35,15 +38,17 @@ vm_count            = "3"
 # Name of the VM template to clone from
 vm_template         = "packer-ubuntu2404-template"
 
+# Set the target boot device. Format should be "order=scsi0;net0;ide2" or whatever you want to boot from
+vm_boot_device      = "order=scsi0;ide0" 
+
+# Choose between '1' to enable the QEMU Guest Agent VM setting, or '0' to disable it
+vm_qemu_agent       = 1
+
+# Choose between 'seabios' (legacy) or 'ovmf' (UEFI) to set the boot mode. Match this to the template. 
+vm_bios             = "ovmf"
+
 # Boolean ("true" or "false") defining if a VM starts automatically on host boot
 vm_onboot           = "true"
-
-# List of IP configurations, one per VM instance
-vm_ipconfig         = [
-  "ip=192.168.1.200/24,gw=192.168.1.1",
-  "ip=192.168.1.201/24,gw=192.168.1.1",
-  "ip=192.168.1.202/24,gw=192.168.1.1"
-]
 
 # -------------------------------------------------------------------
 # VM Hardware Configuration
@@ -77,3 +82,22 @@ vm_nic1_bridge      = "vmbr0"
 
 # Firewall enabled on the NIC ("true" or "false")
 vm_nic1_firewalls   = "false"
+
+# -------------------------------------------------------------------
+# CloudInit Configuration
+# -------------------------------------------------------------------
+# List of IP configurations, one per VM instance
+vm_ipconfig         = [
+  "ip=192.168.1.200/24,gw=192.168.1.254",
+  "ip=192.168.1.201/24,gw=192.168.1.254",
+  "ip=192.168.1.202/24,gw=192.168.1.254"
+]
+
+# CloudInit user
+ciuser              = "dantheserverman"
+
+# cipassword = Define this with a env variable, don't put it in a file!
+# Example : 'export TF_VAR_cipassword=' will allow terraform to auto locate it
+
+# CloudInit user SSH key
+ssh_pub_key        = "YOUR_PUB_KEY_HERE"

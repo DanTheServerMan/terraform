@@ -28,6 +28,11 @@ variable "vm_id" {
   type = string
 }
 
+# ProxMox VM tag that will be added to the VM after its created, to help organize your VMs
+variable "vm_tags" {
+  type = string
+}
+
 # Number of VMs to create (used with `count`, should be a stringified number)
 variable "vm_count" {
   type = string
@@ -35,6 +40,21 @@ variable "vm_count" {
 
 # Number of CPU cores assigned to the VM
 variable "vm_cores" {
+  type = string
+}
+
+# Choose between '1' to enable the QEMU Guest Agent VM setting, or '0' to disable it
+variable "vm_qemu_agent" {
+  type = number
+}
+
+# Choose between 'seabios' (legacy) or 'ovmf (UEFI) to set the boot mode. Match this to the template. 
+variable "vm_bios" {
+  type = string
+}
+
+# Set the target boot device. Format should be "order=scsi0;net0;ide2" or whatever you want to boot from
+variable "vm_boot_device" {
   type = string
 }
 
@@ -101,4 +121,19 @@ variable "vm_template" {
 # List of IP configuration strings (e.g., ["ip=192.168.1.100/24,gw=192.168.1.1"])
 variable "vm_ipconfig" {
   type = list(string)
+}
+
+# Cloud-init user
+variable "ciuser" {
+  type    = string
+}
+
+# Cloud-init user password
+variable "cipassword" {
+  type    = string
+}
+
+# Cloud-init user SSH key
+variable "ssh_pub_key" {
+  type    = string
 }
