@@ -45,7 +45,7 @@ disk {
   type    = "cloudinit"  
   slot = "ide0"
 }
-
+ 
  network {
    model = var.vm_nic1_model
    bridge = var.vm_nic1_bridge
