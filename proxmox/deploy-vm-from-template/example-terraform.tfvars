@@ -77,5 +77,3 @@ vm_nic1_bridge      = "vmbr0"
 
 # Firewall enabled on the NIC ("true" or "false")
 vm_nic1_firewalls   = "false"
-
-
