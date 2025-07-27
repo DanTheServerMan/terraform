@@ -9,9 +9,7 @@ This Terraform implementation uses the API and a dedicated user. The variable 'p
 **example-terraform.tfvars** - This is an example vars file. It will have the variables you need to fill out to run a script. Some variables may have a generic value already, as I found it unlikely all variables would be changed between uses. You should copy this file and name it "terraform.tfvars", as the script(s) look for that file. In addition, *terraform.tfvars* is git ignore'd.
 
 ### Scripts
-**deploy-vm-cloudinit** - This will deploy any number of VMs from a preconfigured cloudinit. Once your template is setup, this will allow you to rapidly build and teardown VMs. Since it uses cloudinit, they should already be IP'd (DHCP) and ready to access remotely. All variables such as ISOs, datastores, RAM, cores, etc. must be defined in the terraform.tfvars file.
-
-Further guidance on how to use this script is here: https://dantheserverman.com/2025/01/18/terraform-cloudinit-proxmox/ 
+**deploy-vm-from-template** - This will deploy any number of VMs from a preconfigured VM template. Once your template is setup, this will allow you to rapidly build and teardown VMs. All variables such as ISOs, datastores, RAM, cores, etc. must be defined in the terraform.tfvars file.
 
 NOTE: This performs a clone operation, if you are deploying many VMs you may get an error such as "TASK ERROR: clone failed: cfs-lock 'datastore' error: got lock request timeout'", and your 'terraform apply' will fail. If this happens, just reapply the changes, and it will finish. This error can be due to ProxMox not allowing so many disk clone operations in parallel.
 
