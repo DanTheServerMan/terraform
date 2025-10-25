@@ -28,11 +28,6 @@ variable "vm_id" {
   type = string
 }
 
-# ProxMox VM tag that will be added to the VM after its created, to help organize your VMs
-variable "vm_tags" {
-  type = string
-}
-
 # Number of VMs to create (used with `count`, should be a stringified number)
 variable "vm_count" {
   type = string
@@ -43,13 +38,18 @@ variable "vm_cores" {
   type = string
 }
 
-# Choose between '1' to enable the QEMU Guest Agent VM setting, or '0' to disable it
-variable "vm_qemu_agent" {
-  type = number
+# Whether the VM should start on host boot ("1" for yes, "0" for no)
+variable "vm_onboot" {
+  type = string
 }
 
-# Choose between 'seabios' (legacy) or 'ovmf (UEFI) to set the boot mode. Match this to the template. 
+# Sets the BIOS to legacy or OVMF
 variable "vm_bios" {
+  type = string
+}
+
+# Enables the Guest Agent
+variable "vm_qemu_agent" {
   type = string
 }
 
@@ -58,8 +58,8 @@ variable "vm_boot_device" {
   type = string
 }
 
-# Whether the VM should start on host boot ("1" for yes, "0" for no)
-variable "vm_onboot" {
+# ProxMox VM tag that will be added to the VM after its created, to help organize your VMs
+variable "vm_tags" {
   type = string
 }
 
@@ -76,6 +76,12 @@ variable "vm_scsihw" {
 # Description text for the VM (visible in the Proxmox web UI)
 variable "vm_desc" {
   type = string
+}
+
+# Sets the os_type to cloud-init
+variable "vm_ostype" {
+  type = string
+  default = "cloud-init"
 }
 
 # Datastore (storage location) for the first disk
@@ -99,6 +105,11 @@ variable "vm_disk1_slot" {
 }
 
 # Model type for the NIC (e.g., "virtio", "e1000")
+variable "vm_nic1_id" {
+  type = string
+}
+
+# Model type for the NIC (e.g., "virtio", "e1000")
 variable "vm_nic1_model" {
   type = string
 }
@@ -113,27 +124,12 @@ variable "vm_nic1_firewalls" {
   type = string
 }
 
-# Template VM to clone from
+# Template VM or container to clone from
 variable "vm_template" {
   type = string
 }
 
-# List of IP configuration strings (e.g., ["ip=192.168.1.100/24,gw=192.168.1.1"])
+# List of IP configuration strings for cloud-init (e.g., ["ip=192.168.1.100/24,gw=192.168.1.1"])
 variable "vm_ipconfig" {
   type = list(string)
-}
-
-# Cloud-init user
-variable "ciuser" {
-  type    = string
-}
-
-# Cloud-init user password
-variable "cipassword" {
-  type    = string
-}
-
-# Cloud-init user SSH key
-variable "ssh_pub_key" {
-  type    = string
 }
